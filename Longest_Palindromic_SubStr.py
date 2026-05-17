@@ -1,0 +1,44 @@
+# class Solution(object):
+#     def longestPalindrome(self, s):
+
+#         palList = []
+
+#         for i in range(len(s)):
+#             for j in range(i + 1, len(s) + 1):
+#                 sub = s[i:j]
+
+#                 if sub == sub[::-1]:
+#                     palList.append(sub)
+
+#         return max(palList, key=len)
+    
+
+
+class Solution(object):
+
+    def longestPalindrome(self, s):
+
+        res = ""
+
+        def expand(l, r):
+
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                l -= 1
+                r += 1
+
+            return s[l+1:r]
+
+        for i in range(len(s)):
+
+            p1 = expand(i, i)
+            p2 = expand(i, i+1)
+
+            if len(p1) > len(res):
+                res = p1
+            if len(p2) > len(res):
+                res = p2
+
+        return res
+
+obj = Solution()
+print(obj.longestPalindrome("bababd"))
